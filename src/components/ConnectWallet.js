@@ -9,7 +9,7 @@ export const userSession = new UserSession({ appConfig });
 function authenticate() {
   showConnect({
     appDetails: {
-      name: "Stacks React Starter",
+      name: "Bloodfuse",
       icon: window.location.origin + "/logo512.png",
     },
     redirectTo: "/",
