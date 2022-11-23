@@ -29,7 +29,7 @@ const SendMany = () => {
   const [demo, setDemo] = useState([]);
   const [balances, setBalance] = useState(0);
   const [stxInput, setStxInput] = useState(0);
-  const [response, setResponse] = useState(null);
+  const [response, setResponse] = useState('');
   let add = [];
 
   useEffect(() => {
@@ -163,6 +163,7 @@ if(Pustx>balances*1000000){
   <div class="card-body">
     <h5 class="card-title">BloodFuse</h5>
     <br />
+    <h4>{response}</h4>
     <input onChange={(e)=>setStxInput(e.target.value)} style={{border:'none',textAlign:'center'}} placeholder="Input Quantity " type="number" />
     <br />
     <br />
