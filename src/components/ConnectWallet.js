@@ -27,8 +27,11 @@ function disconnect() {
 const ConnectWallet = () => {
   if (userSession.isUserSignedIn()) {
     return (
-      <div>
-        <button className="Connect" onClick={disconnect}>
+      // display: flex;
+      //   align-items: center;
+      //   justify-content: center;
+      <div className="">
+        <button className="Connect " onClick={disconnect}>
           Disconnect Wallet
         </button>
         <p>mainnet: {userSession.loadUserData().profile.stxAddress.mainnet}</p>
@@ -38,11 +41,12 @@ const ConnectWallet = () => {
       </div>
     );
   }
-
+  
   return (
-    <button className="Connect" onClick={authenticate}>
+    <div style={{height:'500px'}} className="d-flex align-items-center justify-content-center"><button  className="Connect  " onClick={authenticate}>
       Connect Wallet
-    </button>
+    </button></div>
+    
   );
 };
 
