@@ -283,7 +283,7 @@ if(Pustx>balances*1000000){
                 onClick={handleOpenContractCall}
               >
                 {" "}
-                send many
+                Disburse 
               </button>
             </div>
           </div>
