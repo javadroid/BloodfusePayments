@@ -20,6 +20,7 @@ import { userSession } from "./ConnectWallet";
 import axios from "axios";
 import React from "react";
 import { principalCV } from "@stacks/transactions/dist/clarity/types/principalCV";
+import { stringCV } from "@stacks/transactions/dist/clarity/types/stringCV";
 
 const SendMany = () => {
   const stxAddress = userSession.loadUserData().profile.stxAddress.testnet;
@@ -107,11 +108,12 @@ const SendMany = () => {
     let a = [];
     let Pustx = 0;
     recipient.forEach((e) => {
+      console.log(e)
       const ustxN = parseInt(e.ustx);
       const v = tupleCV({
         ustx: uintCV(ustxN),
         to: principalCV(e.to),
-        memo: bufferCV(Buffer.from(e.memo)),
+        memo: stringUtf8CV(e.memo),
       });
 
       a.push(v);
@@ -130,7 +132,7 @@ if(Pustx>balances*1000000){
       network: new StacksTestnet(),
       anchorMode: AnchorMode.Any,
       contractAddress: "ST27XGZFXEJ0DTJMFX9PTZ3BFVA1XDF5RXK7G6N1Q",
-      contractName: "bloodfuse-payment-system",
+      contractName: "blood-fuse-payment-system",
       functionName: "send-many",
       functionArgs: [listCV(a)],
       postConditionMode: PostConditionMode.Deny,

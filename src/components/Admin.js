@@ -3,15 +3,10 @@ import { StacksTestnet } from "@stacks/network";
 import '../index.css'
 import {
   AnchorMode,
-  bufferCV,
-  falseCV,
   FungibleConditionCode,
-  intCV,
   listCV,
   makeStandardSTXPostCondition,
   PostConditionMode,
-  stringUtf8CV,
-  trueCV,
   tupleCV,
   uintCV,
 } from "@stacks/transactions";
@@ -20,6 +15,7 @@ import { userSession } from "./ConnectWallet";
 import axios from "axios";
 import React from "react";
 import { principalCV } from "@stacks/transactions/dist/clarity/types/principalCV";
+import { stringCV, stringUtf8CV } from "@stacks/transactions/dist/clarity/types/stringCV";
 
 export default function Admin() {
   const stxAddress = userSession.loadUserData().profile.stxAddress.testnet;
@@ -28,7 +24,7 @@ export default function Admin() {
   let [recipient, setRecipient] = useState([]);
   const [demo, setDemo] = useState([]);
   const [balances, setBalance] = useState(0);
-  const [response, setResponse] = useState(null);
+  const [response, setResponse] = useState('');
   let add = [];
 
   useEffect(() => {
@@ -109,7 +105,7 @@ export default function Admin() {
       const v = tupleCV({
         ustx: uintCV(ustxN),
         to: principalCV(e.to),
-        memo: bufferCV(Buffer.from(e.memo)),
+        memo: stringUtf8CV(e.memo),
       });
 
       a.push(v);
@@ -128,7 +124,7 @@ if(Pustx>balances*1000000){
       network: new StacksTestnet(),
       anchorMode: AnchorMode.Any,
       contractAddress: "ST27XGZFXEJ0DTJMFX9PTZ3BFVA1XDF5RXK7G6N1Q",
-      contractName: "bloodfuse-payment-system",
+      contractName: "blood-fuse-payment-system",
       functionName: "send-many",
       functionArgs: [listCV(a)],
       postConditionMode: PostConditionMode.Deny,
